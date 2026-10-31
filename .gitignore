@@ -1,0 +1,21 @@
+# 依赖
+node_modules/
+
+# 构建产物：由 `npm run build:renderer` 生成（bundle.js / pdf.worker.js / cmaps / standard_fonts）
+src/renderer/dist/
+
+# 打包产物
+dist/
+release/
+
+# 打包期用到的第三方二进制；缺失时 after-pack 会跳过写图标，不影响功能
+# 需要自定义 exe 图标时，把 rcedit-x64.exe 放回 build/ 即可
+build/rcedit-x64.exe
+
+# 临时 / 本地文件
+_tmp_*
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+docs_crop-https.png

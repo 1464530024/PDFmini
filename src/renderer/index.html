@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'self' app:; img-src 'self' app: data: blob:; style-src 'self' app: 'unsafe-inline'; font-src 'self' app: data:; script-src 'self' app:; worker-src 'self' app: blob:; connect-src 'self' app: data: blob:;" />
+<title>PDFmini</title>
+<link rel="stylesheet" href="./css/style.css" />
+</head>
+<body class="home">
+  <!-- 标题栏 -->
+  <header id="titlebar">
+    <div class="tb-brand">
+      <span class="tb-logo">P</span>
+      <span class="tb-name">PDFmini</span>
+      <span class="tb-file" id="tb-file"></span>
+      <span class="tb-dirty" id="tb-dirty"></span>
+    </div>
+    <div class="tb-drag"></div>
+    <div class="tb-controls">
+      <button class="win-btn" id="win-min"><svg viewBox="0 0 12 12"><rect x="1.5" y="5.5" width="9" height="1"/></svg></button>
+      <button class="win-btn" id="win-max"><svg viewBox="0 0 12 12"><rect x="1.5" y="1.5" width="9" height="9" fill="none" stroke="currentColor" stroke-width="1"/></svg></button>
+      <button class="win-btn danger" id="win-close"><svg viewBox="0 0 12 12"><path d="M2 2 L10 10 M10 2 L2 10" stroke="currentColor" stroke-width="1.3" fill="none"/></svg></button>
+    </div>
+  </header>
+
+  <!-- 模式 + 分组（仅打开文档后显示） -->
+  <div id="moderow">
+    <div class="mode-switch">
+      <button class="mode-btn active" data-mode="view"></button>
+      <button class="mode-btn" data-mode="edit"></button>
+    </div>
+    <div class="ctx-tabs" id="ctx-tabs"></div>
+    <div class="moderow-right" id="moderow-right"></div>
+  </div>
+
+  <!-- 操作栏（文字常显，仅打开文档后显示） -->
+  <div id="toolbar">
+    <div class="tb-group" id="grp-main"></div>
+    <div class="tb-spacer"></div>
+    <div class="tb-group tb-rightbar" id="grp-rightbar"></div>
+  </div>
+
+  <!-- 主体 -->
+  <div id="body">
+    <aside id="sidebar">
+      <div class="sb-tabs">
+        <button class="sb-tab active" data-tab="thumbnails"></button>
+        <button class="sb-tab" data-tab="bookmarks"></button>
+        <button class="sb-tab" data-tab="search"></button>
+      </div>
+      <div class="sb-body">
+        <div class="sb-pane" id="pane-thumbnails"></div>
+        <div class="sb-pane hidden" id="pane-bookmarks"></div>
+        <div class="sb-pane hidden" id="pane-search">
+          <div class="search-box">
+            <input type="text" id="search-input" />
+            <button class="mini-btn" id="search-prev">▲</button>
+            <button class="mini-btn" id="search-next">▼</button>
+          </div>
+          <div class="search-count" id="search-count"></div>
+          <div class="search-results" id="search-results"></div>
+        </div>
+      </div>
+    </aside>
+    <div class="sb-resizer" id="sb-resizer"></div>
+
+    <main id="viewer">
+      <div id="viewport" tabindex="0">
+        <div id="pages"></div>
+      </div>
+      <div id="viewer-loading" class="hidden">
+        <div class="spinner"></div>
+        <div class="loading-text" id="viewer-loading-text"></div>
+      </div>
+      <div id="welcome">
+        <div class="welcome-card">
+          <div class="welcome-logo">PDFmini</div>
+          <div class="welcome-sub" id="welcome-sub"></div>
+          <div class="welcome-actions">
+            <button class="btn-primary" id="welcome-open"></button>
+            <button class="btn-ghost" id="welcome-import"></button>
+          </div>
+          <div class="welcome-recent" id="welcome-recent"></div>
+          <div class="welcome-tip" id="welcome-tip"></div>
+          <div class="welcome-links">
+            <button class="link-btn" id="welcome-about"></button>
+            <span class="link-sep">·</span>
+            <button class="link-btn" id="welcome-help"></button>
+          </div>
+        </div>
+      </div>
+      <div id="drop-hint"></div>
+      <div id="empty-hint" class="empty-hint hidden"></div>
+    </main>
+  </div>
+
+  <!-- 文档标签条 -->
+  <div id="tabbar"><div id="doc-tabs" class="empty"></div></div>
+
+  <!-- 状态栏 -->
+  <footer id="statusbar">
+    <span id="st-page">— / —</span>
+    <span id="st-zoom">100%</span>
+    <span id="st-mode"></span>
+    <span id="st-msg" class="st-msg"></span>
+    <span class="st-spacer"></span>
+    <span id="st-info"></span>
+  </footer>
+
+  <!-- 浮层容器 -->
+  <div id="modal-root"></div>
+  <div id="menu-root"></div>
+  <div id="toast-root"></div>
+  <input type="file" id="hidden-file" accept="image/*,.docx" multiple style="display:none" />
+
+  <script src="./dist/bundle.js"></script>
+</body>
+</html>
